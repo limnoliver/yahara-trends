@@ -1,0 +1,25 @@
+target_default: 15_summary_figs
+
+packages:
+  - dplyr
+  - lubridate
+  - ggplot2
+  
+include:
+  - 10_get_data.yml
+  
+sources:
+  - 15_summary_figs/code/figure_fxns.R
+  
+targets:
+  15_summary_figs:
+    depends:
+      - figures/n_obs_per_year.png
+     
+  all_parameters:
+    command: combine_parameters(tp, ortho_p, ss)
+  
+  figures/n_obs_per_year.png:
+    command: plot_n_per_year(data = all_parameters, fig_name = target_name)
+      
+  
