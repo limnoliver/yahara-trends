@@ -1,0 +1,43 @@
+target_default: 10_get_data
+
+packages:
+  - dataRetrieval
+  - yaml
+  - EGRET
+  
+sources:
+  
+targets:
+  10_get_data:
+    depends:
+      - discharge
+      - tp
+      - ortho_p
+      - ss
+
+  config:
+    command: yaml.load_file('10_get_data/config/dataRetrieval_config.yml')
+      
+  site_no:
+    command: config[['site_no']]
+      
+  pcodes:
+    command: config[['pcodes']]
+      
+  start_date:
+    command: config[['start_date']]
+      
+  end_date:
+    command: config[['end_date']]
+      
+  discharge:
+    command: readNWISDaily(siteNumber = site_no, startDate = start_date, endDate = end_date)
+     
+  tp:
+    command: readNWISSample(siteNumber = site_no, parameterCd = I('00665'), startDate = start_date, endDate = end_date)
+    
+  ortho_p:
+    command: readNWISSample(siteNumber = site_no, parameterCd = I('00671'), startDate = start_date, endDate = end_date)
+    
+  ss:
+    command: readNWISSample(siteNumber = site_no, parameterCd = I('80154'), startDate = start_date, endDate = end_date)

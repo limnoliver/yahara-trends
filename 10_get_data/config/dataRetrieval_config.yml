@@ -1,0 +1,13 @@
+# dataRetrieval parameters
+
+site_no:
+ - '05427718'
+  
+pcodes:
+ - "00665"
+   
+start_date:
+ - ""
+    
+end_date:
+ - ""
