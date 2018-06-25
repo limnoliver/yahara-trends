@@ -11,11 +11,15 @@ sources:
 targets:
   20_prep_data:
     depends:
+      - discharge_eList
       - tp_eList
       - ortho_p_filt_eList
       - p_combo_eList
       - ss_eList
 
+  discharge_eList:
+    command: mergeReport(INFO = discharge_info, Daily = discharge)
+    
   tp_eList:
     command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp)
       
