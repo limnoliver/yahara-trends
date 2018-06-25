@@ -11,6 +11,7 @@ targets:
   10_get_data:
     depends:
       - discharge
+      - discharge_info
       - tp
       - tp_info
       - ortho_p_filt
@@ -37,6 +38,9 @@ targets:
       
   discharge:
     command: readNWISDaily(siteNumber = site_no, startDate = start_date, endDate = end_date)
+    
+  discharge_info:
+    command: readNWISInfo(siteNumber = site_no, parameterCd = I('00060'))
      
   tp:
     command: readNWISSample(siteNumber = site_no, parameterCd = I('00665'), startDate = start_date, endDate = end_date)
