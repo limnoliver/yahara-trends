@@ -1,10 +1,12 @@
 library(dplyr)
 library(lubridate)
 
-combine_parameters <- function(tp, ortho_p, ss) {
-  all_dat <- bind_rows(tp, ortho_p, ss) %>%
+combine_parameters <- function(tp, diss_p, ortho_p_filt, ortho_p_unfilt, ss) {
+  all_dat <- bind_rows(tp, diss_p, ortho_p_filt, ortho_p_unfilt, ss) %>%
     mutate(parameter = c(rep("Total Phosphorus", nrow(tp)),
-                         rep("Orthophosphate", nrow(ortho_p)),
+                         rep("Dissolved P", nrow(diss_p)),
+                         rep("Orthophosphate, filtered", nrow(ortho_p_filt)),
+                         rep("Orthophosphate, unfiltered", nrow(ortho_p_unfilt)),
                          rep("Suspended Sediment", nrow(ss))))
   
   return(all_dat)

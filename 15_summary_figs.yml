@@ -14,10 +14,11 @@ sources:
 targets:
   15_summary_figs:
     depends:
+      - all_parameters
       - figures/n_obs_per_year.png
      
   all_parameters:
-    command: combine_parameters(tp, ortho_p, ss)
+    command: combine_parameters(tp, diss_p, ortho_p_filt, ortho_p_unfilt, ss)
   
   figures/n_obs_per_year.png:
     command: plot_n_per_year(data = all_parameters, fig_name = target_name)
