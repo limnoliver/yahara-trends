@@ -18,7 +18,7 @@ targets:
       - ss_eList
 
   discharge_eList:
-    command: mergeReport(INFO = discharge_info, Daily = discharge)
+    command: as.egret(INFO = discharge_info, Daily = discharge)
     
   tp_eList:
     command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp)
