@@ -1,0 +1,60 @@
+target_default: 25_flow_history_eval
+
+packages:
+  - EGRET
+
+include: 20_prep_data.yml
+
+sources:
+  - 25_flow_history_eval/code/flow_history_fxns.R
+  
+targets:
+  25_flow_history_eval:
+    depends:
+    - figures/flow_hist_1day_min.png
+    - figures/flow_hist_7day_min.png
+    - figures/flow_hist_30day_min.png
+    - figures/flow_hist_median.png
+    - figures/flow_hist_mean.png
+    - figures/flow_hist_1day_max.png
+    - figures/flow_hist_7day_max.png
+    - figures/flow_hist_30day_max.png
+
+  wy_eList:
+    command: setPA(discharge_eList)
+  
+  winter_eList:
+    command: setPA(discharge_eList, paStart = 12, paLong = 3)
+  
+  spring_eList:
+    command: setPA(discharge_eList, paStart = 3, paLong = 3)
+    
+  summer_eList:
+    command: setPA(discharge_eList, paStart = 6, paLong = 3)
+    
+  list_eLists:
+    command: list(wy_eList, winter_eList, spring_eList, summer_eList)
+    
+  figures/flow_hist_1day_min.png:
+    command: construct_flow_fig(dat = list_eLists, stat = I(1), file_name = target_name)
+    
+  figures/flow_hist_7day_min.png:
+    command: construct_flow_fig(dat = list_eLists, stat = I(2), file_name = target_name)
+    
+  figures/flow_hist_30day_min.png:
+    command: construct_flow_fig(dat = list_eLists, stat = I(3), file_name = target_name)
+    
+  figures/flow_hist_median.png:
+    command: construct_flow_fig(dat = list_eLists, stat = I(4), file_name = target_name)
+    
+  figures/flow_hist_mean.png:
+    command: construct_flow_fig(dat = list_eLists, stat = I(5), file_name = target_name)
+    
+  figures/flow_hist_30day_max.png:
+    command: construct_flow_fig(dat = list_eLists, stat = I(6), file_name = target_name)
+    
+  figures/flow_hist_7day_max.png:
+    command: construct_flow_fig(dat = list_eLists, stat = I(7), file_name = target_name)
+    
+  figures/flow_hist_1day_max.png:
+    command: construct_flow_fig(dat = list_eLists, stat = I(8), file_name = target_name)
