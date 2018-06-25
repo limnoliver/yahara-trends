@@ -12,8 +12,13 @@ targets:
     depends:
       - discharge
       - tp
-      - ortho_p
+      - tp_info
+      - ortho_p_filt
+      - ortho_p_filt_info
+      - ortho_p_unfilt
+      - diss_p
       - ss
+      - ss_info
 
   config:
     command: yaml.load_file('10_get_data/config/dataRetrieval_config.yml')
@@ -36,8 +41,23 @@ targets:
   tp:
     command: readNWISSample(siteNumber = site_no, parameterCd = I('00665'), startDate = start_date, endDate = end_date)
     
-  ortho_p:
+  tp_info:
+    command: readNWISInfo(siteNumber = site_no, parameterCd = I('00665'))
+    
+  ortho_p_filt:
     command: readNWISSample(siteNumber = site_no, parameterCd = I('00671'), startDate = start_date, endDate = end_date)
+    
+  ortho_p_filt_info:
+    command: readNWISInfo(siteNumber = site_no, parameterCd = I('00671'))
+    
+  ortho_p_unfilt:
+    command: readNWISSample(siteNumber = site_no, parameterCd = I('70507'), startDate = start_date, endDate = end_date)
+    
+  diss_p:
+    command: readNWISSample(siteNumber = site_no, parameterCd = I('00666'), startDate = start_date, endDate = end_date)
     
   ss:
     command: readNWISSample(siteNumber = site_no, parameterCd = I('80154'), startDate = start_date, endDate = end_date)
+    
+  ss_info:
+    command: readNWISInfo(site_no, I('80154'))
