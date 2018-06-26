@@ -16,9 +16,9 @@ targets:
     - figures/flow_hist_30day_min.png
     - figures/flow_hist_median.png
     - figures/flow_hist_mean.png
-    - figures/flow_hist_1day_max.png
-    - figures/flow_hist_7day_max.png
     - figures/flow_hist_30day_max.png
+    - figures/flow_hist_7day_max.png
+    - figures/flow_hist_1day_max.png
 
   wy_eList:
     command: setPA(discharge_eList)
@@ -33,28 +33,28 @@ targets:
     command: setPA(discharge_eList, paStart = 6, paLong = 3)
     
   list_eLists:
-    command: list(wy_eList, winter_eList, spring_eList, summer_eList)
+    command: create_list(wy_eList, winter_eList, spring_eList, summer_eList)
     
   figures/flow_hist_1day_min.png:
-    command: construct_flow_fig(dat = list_eLists, stat = I(1), file_name = target_name)
+    command: construct_flow_fig(dat = list_eLists, file_name = target_name, stat = I(1))
     
   figures/flow_hist_7day_min.png:
-    command: construct_flow_fig(dat = list_eLists, stat = I(2), file_name = target_name)
+    command: construct_flow_fig(dat = list_eLists, file_name = target_name, stat = I(2))
     
   figures/flow_hist_30day_min.png:
-    command: construct_flow_fig(dat = list_eLists, stat = I(3), file_name = target_name)
-    
+    command: construct_flow_fig(dat = list_eLists, file_name = target_name, stat = I(3))
+
   figures/flow_hist_median.png:
-    command: construct_flow_fig(dat = list_eLists, stat = I(4), file_name = target_name)
-    
+    command: construct_flow_fig(dat = list_eLists, file_name = target_name, stat = I(4))
+
   figures/flow_hist_mean.png:
-    command: construct_flow_fig(dat = list_eLists, stat = I(5), file_name = target_name)
-    
+    command: construct_flow_fig(dat = list_eLists, file_name = target_name, stat = I(5))
+
   figures/flow_hist_30day_max.png:
-    command: construct_flow_fig(dat = list_eLists, stat = I(6), file_name = target_name)
-    
+    command: construct_flow_fig(dat = list_eLists, file_name = target_name, stat = I(6))
+
   figures/flow_hist_7day_max.png:
-    command: construct_flow_fig(dat = list_eLists, stat = I(7), file_name = target_name)
-    
+    command: construct_flow_fig(dat = list_eLists, file_name = target_name, stat = I(7))
+
   figures/flow_hist_1day_max.png:
-    command: construct_flow_fig(dat = list_eLists, stat = I(8), file_name = target_name)
+    command: construct_flow_fig(dat = list_eLists, file_name = target_name,  stat = I(8))
