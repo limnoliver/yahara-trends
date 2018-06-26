@@ -69,4 +69,4 @@ targets:
     command: construct_q_fig(dat = wy_eList, file_name = target_name, qlim = I(NA))
     
   figures/flow_daily_record_above400.png:
-    command: construct_q_fig(dat = wy_eList, file_name = target_name, qlim = 400)
+    command: construct_q_fig(dat = wy_eList, file_name = target_name, qlim = I(400))
