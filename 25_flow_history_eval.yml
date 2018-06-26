@@ -19,6 +19,9 @@ targets:
     - figures/flow_hist_30day_max.png
     - figures/flow_hist_7day_max.png
     - figures/flow_hist_1day_max.png
+    - figures/flow_hist_variability.png
+    - figures/flow_daily_record.png
+    - figures/flow_daily_record_above400.png
 
   wy_eList:
     command: setPA(discharge_eList)
@@ -58,3 +61,12 @@ targets:
 
   figures/flow_hist_1day_max.png:
     command: construct_flow_fig(dat = list_eLists, file_name = target_name,  stat = I(8))
+    
+  figures/flow_hist_variability.png:
+    command: construct_var_fig(dat = list_eLists, file_name = target_name)
+    
+  figures/flow_daily_record.png:
+    command: construct_q_fig(dat = wy_eList, file_name = target_name, qlim = I(NA))
+    
+  figures/flow_daily_record_above400.png:
+    command: construct_q_fig(dat = wy_eList, file_name = target_name, qlim = 400)
