@@ -1,0 +1,37 @@
+target_default: 30_analyze_data
+
+packages:
+  - EGRET
+
+include: 25_flow_history_eval.yml
+
+sources:
+  - 30_analyze_data/code/plot_conc_flux.R
+  
+targets:
+  30_analyze_data:
+    depends:
+      - tp_wy_out
+      - tp_seasons_out
+      - figures/tp_trends/tp_wy_conc.png
+
+  tp_wy_out:
+    command: runSeries(eList = tp_eList, windowSide = I(7), paStart = 10, paLong = 12)
+    
+  tp_winter_out:
+    command: runSeries(eList = tp_eList, windowSide = I(7), paStart = 12, paLong = 3)
+    
+  tp_spring_out:
+    command: runSeries(eList = tp_eList, windowSide = I(7), paStart = 3, paLong = 3)
+    
+  tp_summer_out:
+    command: runSeries(eList = tp_eList, windowSide = I(7), paStart = 6, paLong = 3)
+    
+  tp_fall_out:
+    command: runSeries(eList = tp_eList, windowSide = I(7), paStart = 9, paLong = 3)
+    
+  tp_seasons_out: 
+    command: list(tp_winter_out, tp_spring_out, tp_summer_out, tp_fall_out)
+    
+  figures/tp_trends/tp_wy_conc.png:
+    command: construct_conc_fig(mod_out = tp_seasons_out, file_name = target_name)
