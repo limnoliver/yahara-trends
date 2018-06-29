@@ -33,5 +33,5 @@ targets:
   tp_seasons_out: 
     command: list(tp_winter_out, tp_spring_out, tp_summer_out, tp_fall_out)
     
-  figures/tp_trends/tp_wy_conc.png:
+  figures/tp_trends/tp_seasonal_conc.png:
     command: construct_conc_fig(mod_out = tp_seasons_out, file_name = target_name)
