@@ -20,9 +20,9 @@ summarize_yearly <- function(precip_dat) {
   dat_yearly <- precip_dat %>%
     group_by(waterYear) %>%
     summarize(yearly_precip = sum(precip_in, na.rm = T),
-              yearly_1inch = sum(precip_in >= 1, na.rm = T),
-              yearly_2inch = sum(precip_in >= 2, na.rm = T), 
-              yearly_3inch = sum(precip_in >= 3, na.rm = T)) %>%
+              days_1inch = sum(precip_in >= 1, na.rm = T),
+              days_2inch = sum(precip_in >= 2, na.rm = T), 
+              days_3inch = sum(precip_in >= 3, na.rm = T)) %>%
     filter(waterYear < 2018) %>%
     ungroup() %>%
     mutate(cumulative_yearly_precip = cumsum(yearly_precip))
