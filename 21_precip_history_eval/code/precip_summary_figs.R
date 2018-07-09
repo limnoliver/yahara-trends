@@ -74,18 +74,37 @@ plot_precip_time <- function(fig_name, precip_dat, start_year, time_period, type
 
 }
 
+plot_precip_extremes <- function(fig_name, precip_dat, time_period) {
+  
+  if (time_period == 'month') {
+    p <- ggplot(precip_dat, aes(x = waterYear, y = days_1inch)) +
+      geom_point(aes(color = month)) +
+      geom_smooth(aes(group = month, color = month), method="glm", method.args=list(family=poisson), se = T) +
+      facet_wrap(~month, ncol = 2, scales = 'free_y', dir = 'v') +
+      scale_color_manual(values = month.cols, guide = F) +
+      theme_bw() + 
+      labs(x = "Water Year", y = "Days with 1+ inches \nof rain @ MSN")
+  } else {
+    p <- ggplot(precip_dat, aes(x = waterYear, y =days_1inch)) +
+      geom_point() +
+      geom_smooth(method="glm", method.args=list(family=poisson), se = T) +
+      theme_bw() + 
+      labs(x = "Water Year", y = "Days with 1+ inches \nof rain @ MSN")
+  }
+  
+  ggsave(fig_name, p, height = ifelse(time_period == 'month', 12, 4), 
+         width = ifelse(time_period == 'month', 9, 6))
 
-# library(ggplot2)
-# library(viridis)
-# # Use viridis and magma as color choices.
-# month.cols<-c(viridis(6, begin=.2, end=.99), rev(magma(6, begin=.2, end=.95)))
-# 
-# 
-# ggplot(dat_month, aes(x = waterYear, y = days_1inch)) +
-#   geom_point(aes(color = month)) +
-#   geom_smooth(aes(group = month, color = month), method="glm", method.args=list(family=poisson), se = T) +
-#   facet_wrap(~month, ncol = 2, scales = 'free_y') +
-#   scale_color_manual(values = month.cols, guide = F)
+}
+
+
+library(ggplot2)
+library(viridis)
+# Use viridis and magma as color choices.
+month.cols<-c(viridis(6, begin=.2, end=.99), rev(magma(6, begin=.2, end=.95)))
+
+
+
 # 
 # dat_month_1990 <- filter(dat_month, waterYear >1989)
 # 
