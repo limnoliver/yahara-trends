@@ -2,26 +2,35 @@ target_default: 20_prep_data
 
 packages:
   - EGRET
+  - dplyr
+  - lubridate
 
 include: 15_summary_figs.yml
 
 sources:
   - 20_prep_data/code/data_prep_fxns.R
+  - 10_get_data/code/precip_fxns.R
   
 targets:
   20_prep_data:
     depends:
       - discharge_eList
       - tp_eList
+      - tp_dv_eList
       - ortho_p_filt_eList
       - p_combo_eList
       - ss_eList
+      - 20_prep_data/out/yearly_precip.csv
+      - 20_prep_data/out/monthly_precip.csv
 
   discharge_eList:
     command: as.egret(INFO = discharge_info, Daily = discharge)
     
   tp_eList:
     command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp)
+    
+  tp_dv_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_daily)
       
   ortho_p_filt_eList:
     command: mergeReport(INFO = ortho_p_filt_info, Daily = discharge, Sample = ortho_p_filt)
@@ -34,3 +43,15 @@ targets:
     
   ss_eList:
     command: mergeReport(INFO = ss_info, Daily = discharge, Sample = ss)
+    
+  yearly_precip:
+    command: summarize_yearly(precip_dat = msn_precip)
+    
+  20_prep_data/out/yearly_precip.csv:
+    command: write.csv(yearly_precip, target_name, row.names = FALSE)
+    
+  monthly_precip:
+    command: summarize_monthly(precip_dat = msn_precip)
+    
+  20_prep_data/out/monthly_precip.csv:
+    command: write.csv(monthly_precip, target_name, row.names = FALSE)
