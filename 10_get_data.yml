@@ -8,6 +8,7 @@ packages:
   
 sources:
   - 10_get_data/code/get_daily_data_nwis.R
+  - 10_get_data/code/precip_fxns.R
   
 targets:
   10_get_data:
@@ -23,6 +24,7 @@ targets:
       - diss_p
       - ss
       - ss_info
+      - msn_precip
 
   config:
     command: yaml.load_file('10_get_data/config/dataRetrieval_config.yml')
