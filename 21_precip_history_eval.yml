@@ -1,0 +1,49 @@
+target_default: 21_precip_history_eval
+
+packages:
+  - dplyr
+  - lubridate
+  - ggplot2
+  - viridis
+  
+include:
+  - 20_prep_data.yml
+  
+sources:
+  - 21_precip_history_eval/code/precip_summary_figs.R
+  
+targets:
+  21_precip_history_eval:
+    depends:
+      - figures/precip/monthly_cumulative_precip_1990.png
+      - figures/precip/monthly_cumulative_precip_1940.png
+      - figures/precip/yearly_cumulative_precip_1990.png
+      - figures/precip/yearly_cumulative_precip_1940.png
+      - figures/precip/yearly_precip_1990.png
+      - figures/precip/yearly_precip_1940.png
+      - figures/precip/monthly_precip_1990.png
+      - figures/precip/monthly_precip_1940.png
+      
+  figures/precip/monthly_cumulative_precip_1990.png:
+    command: plot_precip_time(fig_name = target_name, precip_dat = monthly_precip, start_year = I(1990), time_period = I('month'), type = I('cumulative'))
+    
+  figures/precip/monthly_cumulative_precip_1940.png:
+    command: plot_precip_time(fig_name = target_name, precip_dat = monthly_precip, start_year = I(1940), time_period = I('month'), type = I('cumulative'))
+    
+  figures/precip/yearly_cumulative_precip_1940.png:
+    command: plot_precip_time(fig_name = target_name, precip_dat = yearly_precip, start_year = I(1940), time_period = I('year'), type = I('cumulative'))
+    
+  figures/precip/yearly_cumulative_precip_1990.png:
+    command: plot_precip_time(fig_name = target_name, precip_dat = yearly_precip, start_year = I(1990), time_period = I('year'), type = I('cumulative'))
+    
+  figures/precip/yearly_precip_1990.png:
+    command: plot_precip_time(fig_name = target_name, precip_dat = yearly_precip, start_year = I(1990), time_period = I('year'), type = I('totals'))
+    
+  figures/precip/yearly_precip_1940.png:
+    command: plot_precip_time(fig_name = target_name, precip_dat = yearly_precip, start_year = I(1940), time_period = I('year'), type = I('totals'))
+    
+  figures/precip/monthly_precip_1940.png:
+    command: plot_precip_time(fig_name = target_name, precip_dat = monthly_precip, start_year = I(1940), time_period = I('month'), type = I('totals'))
+    
+  figures/precip/monthly_precip_1990.png:
+    command: plot_precip_time(fig_name = target_name, precip_dat = monthly_precip, start_year = I(1990), time_period = I('month'), type = I('totals'))
