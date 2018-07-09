@@ -23,6 +23,8 @@ targets:
       - figures/precip/yearly_precip_1940.png
       - figures/precip/monthly_precip_1990.png
       - figures/precip/monthly_precip_1940.png
+      - figures/precip/monthly_1inch.png
+      - figures/precip/yearly_1inch.png
       
   figures/precip/monthly_cumulative_precip_1990.png:
     command: plot_precip_time(fig_name = target_name, precip_dat = monthly_precip, start_year = I(1990), time_period = I('month'), type = I('cumulative'))
@@ -47,3 +49,9 @@ targets:
     
   figures/precip/monthly_precip_1990.png:
     command: plot_precip_time(fig_name = target_name, precip_dat = monthly_precip, start_year = I(1990), time_period = I('month'), type = I('totals'))
+    
+  figures/precip/monthly_1inch.png:
+    command: plot_precip_extremes(fig_name = target_name, precip_dat = monthly_precip, time_period = I("month"))
+
+  figures/precip/yearly_1inch.png:
+    command: plot_precip_extremes(fig_name = target_name, precip_dat = yearly_precip, time_period = I("year"))
