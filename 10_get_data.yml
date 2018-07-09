@@ -25,6 +25,7 @@ targets:
       - ss
       - ss_info
       - msn_precip
+      - 10_get_data/out/msn_precip.csv
 
   config:
     command: yaml.load_file('10_get_data/config/dataRetrieval_config.yml')
@@ -79,4 +80,7 @@ targets:
     
   msn_precip:
     command: get_precip(file_loc = '10_get_data/raw/msn_weather_record.csv')
+    
+  10_get_data/out/msn_precip.csv:
+    command: write.csv(msn_precip, target_name, row.names = FALSE)
     
