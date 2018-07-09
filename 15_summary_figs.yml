@@ -22,5 +22,3 @@ targets:
   
   figures/n_obs_per_year.png:
     command: plot_n_per_year(data = all_parameters, fig_name = target_name)
-      
-  
