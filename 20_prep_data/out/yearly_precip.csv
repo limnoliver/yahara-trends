@@ -1,4 +1,4 @@
-"waterYear","yearly_precip","yearly_1inch","yearly_2inch","yearly_3inch","cumulative_yearly_precip"
+"waterYear","yearly_precip","days_1inch","days_2inch","days_3inch","cumulative_yearly_precip"
 1940,25.53,4,1,1,25.53
 1941,33.88,8,1,1,59.41
 1942,28.91,6,1,0,88.32
