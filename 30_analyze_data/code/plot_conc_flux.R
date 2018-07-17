@@ -9,7 +9,7 @@ construct_conc_fig <- function(mod_out, type, constituent, file_name = target_na
     par(mfrow = c(2,2), mar = c(2,5,4,1), cex = 1.2)
     
     for (i in 1:length(mod_out)) {
-      plotConcHist(mod_out[[i]], printTitle = F, customPar = T)
+      plotConcHistBoot(mod_out[[i]], printTitle = F, customPar = T)
       title(main = paste(plot_titles[i], constituent, extra_text))
     }
     
@@ -23,7 +23,7 @@ construct_conc_fig <- function(mod_out, type, constituent, file_name = target_na
     
     par(cex = 1.2)
     
-    plotConcHist(mod_out, printTitle = F, customPar = T)
+    plotConcHistBoot(mod_out, printTitle = F, customPar = T)
     title(main = plot_title)
     
     dev.off()
