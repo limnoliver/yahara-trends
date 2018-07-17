@@ -1,15 +1,15 @@
-target_default: 32_analyze_data_groups
+target_default: 33_analyze_data_groups
 
 packages:
   - EGRET
   - EGRETci
 
-include: 32_analyze_data_groups.yml
+include: 32_analyze_data_pairs.yml
 
 sources:
   
 targets:
-  32_analyze_data_groups:
+  33_analyze_data_groups:
     depends:
       - tp_wy_groups_out
       - tp_wy_groups_boot
@@ -32,7 +32,7 @@ targets:
     command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = I(10), paLong = I(12))
     
   tp_wy_groups_boot:
-    command: runGroupsBoot(eList = tp_eList, groupResults = tp_wy_groups_out)
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_wy_groups_out, nBoot = 10)
     
   tp_winter_groups_out:
     command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 12, paLong = 3)
