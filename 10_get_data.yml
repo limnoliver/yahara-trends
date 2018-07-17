@@ -15,15 +15,14 @@ targets:
     depends:
       - discharge
       - discharge_info
-      - tp
       - tp_daily
       - tp_info
       - ortho_p_filt
       - ortho_p_filt_info
       - ortho_p_unfilt
       - diss_p
-      - ss
       - ss_info
+      - ss_daily
       - msn_precip
       - 10_get_data/out/msn_precip.csv
 
@@ -57,6 +56,9 @@ targets:
   tp_daily:
     command: get_daily_p(start = start_date, end = end_date, site = site_no, pcode = I('00665'), tp_samples = tp, tp_1997 = tp_daily_wy1997)
     
+  tp_daily_fn:
+    command: get_daily_p_fn(start = start_date, end = end_date, site = site_no, pcode = I('91050'), tp_samples = tp, q = discharge, tp_1997 = tp_daily_wy1997)
+    
   tp_info:
     command: readNWISInfo(siteNumber = site_no, parameterCd = I('00665'))
     
@@ -77,6 +79,9 @@ targets:
     
   ss_info:
     command: readNWISInfo(site_no, I('80154'))
+  
+  ss_daily:
+    command: get_daily_ss(start = start_date, end = end_date, site  = site_no, pcode = I('80154'), ss_samples = ss)
     
   msn_precip:
     command: get_precip(file_loc = '10_get_data/raw/msn_weather_record.csv')
