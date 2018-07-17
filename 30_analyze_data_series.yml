@@ -109,43 +109,43 @@ targets:
     command: construct_conc_fig(mod_out = ss_seasons_out, type = I('seasonal'), constituent = I('SS'), file_name = I('figures/ss_seasonal_conc_trends.png'))
     
   ss_wy_conc_figure:
-    command: construct_conc_fig(mod_out = ss_wy_out, type = I('wy'), constituent = I('SS'), file_name = I('figures/ss_wy_conc_trends.png'))
+    command: construct_conc_fig(mod_out = ss_wy_dv_out, type = I('wy'), constituent = I('SS'), file_name = I('figures/ss_wy_conc_trends.png'))
     
   ss_seasonal_flux_figure:
     command: construct_flux_fig(mod_out = ss_seasons_out, type = I('seasonal'), constituent = I('SS'), file_name = I('figures/ss_seasonal_flux_trends.png'))
     
   ss_wy_flux_figure:
-    command: construct_flux_fig(mod_out = ss_wy_out, type = I('wy'), constituent = I('SS'), file_name = I('figures/ss_wy_flux_trends.png'))
+    command: construct_flux_fig(mod_out = ss_wy_dv_out, type = I('wy'), constituent = I('SS'), file_name = I('figures/ss_wy_flux_trends.png'))
   
   ortho_p_filt_wy_out:
     command: runSeries(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 10, paLong = 12, surfaceStart = I('1993-03-07'))
     
   ortho_p_filt_winter_out:
-    command: runSeries(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 12, paLong = 3, surfaceStart = I('1993-03-07'))
+    command: setPA(eList = ortho_p_filt_wy_out, paStart = 12, paLong = 3, surfaceStart = I('1993-03-07'))
     
   ortho_p_filt_spring_out:
-    command: runSeries(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 3, paLong = 3, surfaceStart = I('1993-03-07'))
+    command: setPA(eList = ortho_p_filt_wy_out, paStart = 3, paLong = 3, surfaceStart = I('1993-03-07'))
     
   ortho_p_filt_summer_out:
-    command: runSeries(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 6, paLong = 3, surfaceStart = I('1993-03-07'))
+    command: setPA(eList = ortho_p_filt_wy_out, paStart = 6, paLong = 3, surfaceStart = I('1993-03-07'))
     
   ortho_p_filt_fall_out:
-    command: runSeries(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 9, paLong = 3, surfaceStart = I('1993-03-07'))
+    command: setPA(eList = ortho_p_filt_wy_out, paStart = 9, paLong = 3, surfaceStart = I('1993-03-07'))
     
   ortho_p_filt_seasons_out: 
     command: list(ortho_p_filt_winter_out, ortho_p_filt_spring_out, ortho_p_filt_summer_out, ortho_p_filt_fall_out)
   
   ortho_p_filt_seasonal_conc_figure:
-    command: construct_conc_fig(mod_out = ortho_p_filt_seasons_out, type = I('seasonal'), constituent = I('SS'), file_name = I('figures/ortho_p_filt_seasonal_conc_trends.png'))
+    command: construct_conc_fig(mod_out = ortho_p_filt_seasons_out, type = I('seasonal'), constituent = I('Ortho P'), file_name = I('figures/ortho_p_filt_seasonal_conc_trends.png'))
     
   ortho_p_filt_wy_conc_figure:
-    command: construct_conc_fig(mod_out = ortho_p_filt_wy_out, type = I('wy'), constituent = I('SS'), file_name = I('figures/ortho_p_filt_wy_conc_trends.png'))
+    command: construct_conc_fig(mod_out = ortho_p_filt_wy_out, type = I('wy'), constituent = I('Ortho P'), file_name = I('figures/ortho_p_filt_wy_conc_trends.png'))
     
   ortho_p_filt_seasonal_flux_figure:
-    command: construct_flux_fig(mod_out = ortho_p_filt_seasons_out, type = I('seasonal'), constituent = I('SS'), file_name = I('figures/ortho_p_filt_seasonal_flux_trends.png'))
+    command: construct_flux_fig(mod_out = ortho_p_filt_seasons_out, type = I('seasonal'), constituent = I('Ortho P'), file_name = I('figures/ortho_p_filt_seasonal_flux_trends.png'))
     
   ortho_p_filt_wy_flux_figure:
-    command: construct_flux_fig(mod_out = ortho_p_filt_wy_out, type = I('wy'), constituent = I('SS'), file_name = I('figures/ortho_p_filt_wy_flux_trends.png'))
+    command: construct_flux_fig(mod_out = ortho_p_filt_wy_out, type = I('wy'), constituent = I('Ortho P'), file_name = I('figures/ortho_p_filt_wy_flux_trends.png'))
      
   
   
