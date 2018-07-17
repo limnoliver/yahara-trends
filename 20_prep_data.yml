@@ -15,11 +15,10 @@ targets:
   20_prep_data:
     depends:
       - discharge_eList
-      - tp_eList
       - tp_dv_eList
       - ortho_p_filt_eList
       - p_combo_eList
-      - ss_eList
+      - ss_dv_eList
       - 20_prep_data/out/yearly_precip.csv
       - 20_prep_data/out/monthly_precip.csv
 
@@ -31,6 +30,9 @@ targets:
     
   tp_dv_eList:
     command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_daily)
+    
+  tp_dv_fn_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_daily_fn)
       
   ortho_p_filt_eList:
     command: mergeReport(INFO = ortho_p_filt_info, Daily = discharge, Sample = ortho_p_filt)
@@ -43,6 +45,9 @@ targets:
     
   ss_eList:
     command: mergeReport(INFO = ss_info, Daily = discharge, Sample = ss)
+    
+  ss_dv_eList:
+    command: mergeReport(INFO = ss_info, Daily = discharge, Sample = ss_daily)
     
   yearly_precip:
     command: summarize_yearly(precip_dat = msn_precip)
