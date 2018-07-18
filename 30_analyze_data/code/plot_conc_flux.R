@@ -1,4 +1,4 @@
-construct_conc_fig <- function(mod_out, type, constituent, file_name = target_name) {
+construct_conc_fig <- function(eList_out, mod_out, type, constituent, file_name = target_name) {
   if (type == 'seasonal') {
     
     plot_titles <- c('Winter', 'Spring', 'Summer', 'Fall')
@@ -9,7 +9,7 @@ construct_conc_fig <- function(mod_out, type, constituent, file_name = target_na
     par(mfrow = c(2,2), mar = c(2,5,4,1), cex = 1.2)
     
     for (i in 1:length(mod_out)) {
-      plotConcHistBoot(mod_out[[i]], printTitle = F, customPar = T)
+      plotConcHistBoot(eList_out[[i]], mod_out[[i]], printTitle = F, customPar = T)
       title(main = paste(plot_titles[i], constituent, extra_text))
     }
     
@@ -23,7 +23,7 @@ construct_conc_fig <- function(mod_out, type, constituent, file_name = target_na
     
     par(cex = 1.2)
     
-    plotConcHistBoot(mod_out, printTitle = F, customPar = T)
+    plotConcHistBoot(eList_out, mod_out, printTitle = F, customPar = T)
     title(main = plot_title)
     
     dev.off()
@@ -32,7 +32,7 @@ construct_conc_fig <- function(mod_out, type, constituent, file_name = target_na
   
 }
 
-construct_flux_fig <- function(mod_out, type, constituent, file_name = target_name) {
+construct_flux_fig <- function(eList_out, mod_out, type, constituent, file_name = target_name) {
   if (type == 'seasonal') {
     
     plot_titles <- c('Winter', 'Spring', 'Summer', 'Fall')
@@ -43,7 +43,7 @@ construct_flux_fig <- function(mod_out, type, constituent, file_name = target_na
     par(mfrow = c(2,2), mar = c(2,5,4,1), cex = 1.2)
     
     for (i in 1:length(mod_out)) {
-      plotFluxHist(mod_out[[i]], printTitle = F, customPar = T)
+      plotFluxHistBoot(eList_out[[i]], mod_out[[i]], printTitle = F, customPar = T)
       title(main = paste(plot_titles[i], constituent, extra_text))
     }
     
@@ -57,7 +57,7 @@ construct_flux_fig <- function(mod_out, type, constituent, file_name = target_na
     
     par(cex = 1.2)
     
-    plotFluxHist(mod_out, printTitle = F, customPar = T)
+    plotFluxHistBoot(eList_out, mod_out, printTitle = F, customPar = T)
     title(main = plot_title)
     
     dev.off()
