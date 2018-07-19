@@ -1,5 +1,9 @@
 # get dv values for tp and then subset them to only observed days
-
+get_gclas_p <- function(start, end, site, pcode) {
+  dat <- readNWISdv(siteNumbers = site, parameterCd = pcode, startDate = start, endDate = end)
+  dat <- rename(dat, tp_pounds = X_91050_00003, tp_cd = X_91050_00003_cd)
+  return(dat)
+}
 get_daily_p <- function(start, end, site, pcode, tp_samples, tp_1997) {
   dat <- readNWISdv(siteNumbers = site, parameterCd = pcode, startDate = start, endDate = end)
   
