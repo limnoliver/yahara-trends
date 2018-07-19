@@ -17,6 +17,7 @@ targets:
       - discharge_info
       - tp_daily
       - tp_info
+      - tp_loads_gclas
       - ortho_p_filt
       - ortho_p_filt_info
       - ortho_p_unfilt
@@ -59,6 +60,9 @@ targets:
   tp_daily_fn:
     command: get_daily_p_fn(start = start_date, end = end_date, site = site_no, pcode = I('91050'), tp_samples = tp, q = discharge, tp_1997 = tp_daily_wy1997)
     
+  tp_loads_gclas:
+    command: get_gclas_p(start = start_date, end = end_date, site = site_no, pcode = I('91050'))
+  
   tp_info:
     command: readNWISInfo(siteNumber = site_no, parameterCd = I('00665'))
     
