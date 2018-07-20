@@ -24,22 +24,22 @@ targets:
       - ss_fall_pairs_out_boot
 
   tp_wy_pairs_out:
-    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2016))
     
   tp_wy_pairs_boot:
     command: runPairsBoot(eList = tp_dv_eList, pairResults = tp_wy_pairs_out)
     
   tp_winter_pairs_out:
-    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = 12, paLong = 3, year1 = 1991, year2 = 2017)
+    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = 12, paLong = 3, year1 = 1991, year2 = 2016)
     
   tp_spring_pairs_out:
-    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = 3, paLong = 3, year1 = 1991, year2 = 2017)
+    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = 3, paLong = 3, year1 = 1991, year2 = 2016)
     
   tp_summer_pairs_out:
-    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = 6, paLong = 3, year1 = 1991, year2 = 2017)
+    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = 6, paLong = 3, year1 = 1991, year2 = 2016)
     
   tp_fall_pairs_out:
-    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = 9, paLong = 3, year1 = 1991, year2 = 2017)
+    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = 9, paLong = 3, year1 = 1991, year2 = 2016)
     
   tp_winter_pairs_out_boot:
     command: runPairsBoot(eList = tp_dv_eList, pairResults = tp_winter_pairs_out)
@@ -54,19 +54,19 @@ targets:
     command: runPairsBoot(eList = tp_dv_eList, pairResults = tp_fall_pairs_out)
   
   ss_wy_pairs_out:
-    command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 10, paLong = 12, year1 = 1991, year2 = 2017)
+    command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 10, paLong = 12, year1 = 1991, year2 = 2016)
     
   ss_winter_pairs_out:
-    command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 12, paLong = 3, year1 = 1991, year2 = 2017)
+    command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 12, paLong = 3, year1 = 1991, year2 = 2016)
     
   ss_spring_pairs_out:
-    command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 3, paLong = 3, year1 = 1991, year2 = 2017)
+    command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 3, paLong = 3, year1 = 1991, year2 = 2016)
     
   ss_summer_pairs_out:
-    command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 6, paLong = 3, year1 = 1991, year2 = 2017)
+    command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 6, paLong = 3, year1 = 1991, year2 = 2016)
     
   ss_fall_pairs_out:
-    command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 9, paLong = 3, year1 = 1991, year2 = 2017)
+    command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 9, paLong = 3, year1 = 1991, year2 = 2016)
 
   ss_winter_pairs_out_boot:
     command: runPairsBoot(eList = ss_dv_eList, pairResults = ss_winter_pairs_out)
@@ -81,16 +81,16 @@ targets:
     command: runPairsBoot(eList = ss_dv_eList, pairResults = ss_fall_pairs_out)
   
   ortho_p_filt_wy_pairs_out:
-    command: runPairs(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 10, paLong = 12, year1 = I(1994), year2 = I(2017))
+    command: runPairs(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 10, paLong = 12, year1 = I(1994), year2 = I(2016))
     
   ortho_p_filt_winter_pairs_out:
-    command: runPairs(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 12, paLong = 3, year1 = I(1994), year2 = I(2017))
+    command: runPairs(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 12, paLong = 3, year1 = I(1994), year2 = I(2016))
     
   ortho_p_filt_spring_pairs_out:
-    command: runPairs(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 3, paLong = 3, year1 = I(1994), year2 = I(2017))
+    command: runPairs(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 3, paLong = 3, year1 = I(1994), year2 = I(2016))
     
   ortho_p_filt_summer_pairs_out:
-    command: runPairs(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 6, paLong = 3, year1 = I(1994), year2 = I(2017))
+    command: runPairs(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 6, paLong = 3, year1 = I(1994), year2 = I(2016))
     
   ortho_p_filt_fall_pairs_out:
-    command: runPairs(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 9, paLong = 3, year1 = I(1994), year2 = I(2017))
+    command: runPairs(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 9, paLong = 3, year1 = I(1994), year2 = I(2016))
