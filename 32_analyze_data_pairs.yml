@@ -68,6 +68,9 @@ targets:
   ss_fall_pairs_out:
     command: runPairs(eList = ss_dv_eList, windowSide = I(7), paStart = 9, paLong = 3, year1 = 1991, year2 = 2016)
 
+  ss_wy_pairs_out_boot:
+    command: runPairsBoot(eList = ss_dv_eList, pairResults = ss_wy_pairs_out)
+    
   ss_winter_pairs_out_boot:
     command: runPairsBoot(eList = ss_dv_eList, pairResults = ss_winter_pairs_out)
     
