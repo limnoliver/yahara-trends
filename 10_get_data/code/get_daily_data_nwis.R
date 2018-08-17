@@ -4,6 +4,7 @@ get_gclas_p <- function(start, end, site, pcode) {
   dat <- rename(dat, tp_pounds = X_91050_00003, tp_cd = X_91050_00003_cd)
   return(dat)
 }
+
 get_daily_p <- function(start, end, site, pcode, tp_samples, tp_1997) {
   dat <- readNWISdv(siteNumbers = site, parameterCd = pcode, startDate = start, endDate = end)
   
@@ -32,6 +33,31 @@ get_daily_p <- function(start, end, site, pcode, tp_samples, tp_1997) {
   # 81050 is TP load
   return(dat_fixed)
     
+}
+
+get_daily_p_all <- function(filename, start, end, site, pcode, tp_1997) {
+  dat <- readNWISdv(siteNumbers = site, parameterCd = pcode, startDate = start, endDate = end)
+  
+  # dates from NWIS
+  dates_have <- unique(dat$Date)
+  
+  # some dvs are missing -- find the ones that are missing, and just take the mean
+  missing_97 <- tp_1997 %>%
+    select(Date, value = `TP.Conc..mg.L.`) %>%
+    mutate(Date = as.Date(Date, format = '%m/%d/%Y')) %>%
+    filter(!(Date %in% dates_have))
+  
+  dat_fixed <- dat %>%
+    select(Date, value = X_00665_00003) %>%
+    bind_rows(missing_97) %>%
+    #left_join(tp_keep) %>%
+    mutate(remark = NA) %>%
+    select(Date, remark, value) %>%
+    arrange(Date)
+  
+  # 81050 is TP load
+  write.csv(dat_fixed, filename, row.names = F)
+  
 }
 
 # get dv values for tp and then subset them to only observed days
