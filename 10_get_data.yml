@@ -9,12 +9,20 @@ packages:
 sources:
   - 10_get_data/code/get_daily_data_nwis.R
   - 10_get_data/code/precip_fxns.R
+  - 10_get_data/code/filter_raw_conc.R
   
 targets:
   10_get_data:
     depends:
       - discharge
       - discharge_info
+      - tp
+      - tp_first
+      - tp_last
+      - tp_mean
+      - tp_r1
+      - tp_r2
+      - tp_r3
       - tp_daily
       - tp_info
       - tp_loads_gclas
@@ -47,10 +55,33 @@ targets:
     
   discharge_info:
     command: readNWISInfo(siteNumber = site_no, parameterCd = I('00060'))
-     
+    
+  # raw TP conc data, multiple obs per day 
   tp:
     command: readNWISSample(siteNumber = site_no, parameterCd = I('00665'), startDate = start_date, endDate = end_date)
-   
+  
+  # use raw TP conc data, but take first/last value
+  tp_first:
+    command: subset_raw_conc(tp, stat = I('first'))
+    
+  tp_last:
+    command: subset_raw_conc(tp, stat = I('last'))
+    
+  # use raw TP conc data, but take mean of values
+  tp_mean:
+    command: subset_raw_conc(tp, stat = I('mean'))
+  
+  # use raw TP conc data, but randomly select 1 obs per day
+  # do this 3 times to compare results
+  tp_r1:
+    command: subset_raw_conc(tp, stat = I('random'))
+    
+  tp_r2:
+    command: subset_raw_conc(tp, stat = I('random'))
+    
+  tp_r3:
+    command: subset_raw_conc(tp, stat = I('random'))
+    
   tp_daily_wy1997:
     command: read.csv('10_get_data/raw/Yahara_daily_conc_WY1997.csv', skip = I(2), stringsAsFactors = FALSE)
   
