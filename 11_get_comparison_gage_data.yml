@@ -1,0 +1,48 @@
+target_default: 11_get_comparison_gage_data
+
+packages:
+  - dataRetrieval
+  - EGRET
+  - dplyr
+  
+sources:
+  
+targets:
+  11_get_comparison_gage_data:
+    depends:
+      - q_compare
+      
+  blackearth:
+    command: readNWISDaily(siteNumber = I('05406500'))
+    
+  blackearth_info:
+    command: readNWISInfo(siteNumber = I('05406500'), parameterCd = I('00060'))
+    
+  badgermill:
+    command: readNWISDaily(siteNumber = I('05435943'))
+    
+  badgermill_info:
+    command: readNWISInfo(siteNumber = I('05435943'), parameterCd = I('00060'))
+    
+  springharbor:
+    command: readNWISDaily(siteNumber = I('05427965'))
+    
+  springharbor_info:
+    command: readNWISInfo(siteNumber = I('05427965'), parameterCd = I('00060'))  
+
+  pheasantbranch:
+    command: readNWISDaily(siteNumber = I('05427948'))
+    
+  pheasantbranch_info:
+    command: readNWISInfo(siteNumber = I('05427948'), parameterCd = I('00060'))      
+    
+  ebpecatonica:
+    command: readNWISDaily(siteNumber = I('05433000'))
+    
+  ebpecatonica_info:
+    command: readNWISInfo(siteNumber = I('05433000'), parameterCd = I('00060'))
+    
+  q_compare:
+    command: list(blackearth, badgermill, springharbor, pheasantbranch, ebpecatonica)
+    
+  
