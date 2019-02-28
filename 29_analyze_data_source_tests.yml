@@ -1,0 +1,52 @@
+target_default: 29_analyze_data_source_tests
+
+packages:
+  - EGRET
+  - EGRETci
+
+include: 19_prep_data_source_tests.yml
+
+sources:
+  - 30_analyze_data/code/plot_conc_flux.R
+  
+targets:
+  29_analyze_data_source_tests:
+    depends:
+      - tp_pair
+      - tp_first_pair
+      - tp_last_pair
+      - tp_mean_pair
+      - tp_r1_pair
+      - tp_r2_pair
+      - tp_r3_pair
+      - tp_dv_pair
+      - tp_dv_fn_pair
+      
+  # pairs tests
+  tp_pair:
+    command: runPairs(eList = tp_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+  
+  tp_first_pair:
+    command: runPairs(eList = tp_first_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+  
+  tp_last_pair:
+    command: runPairs(eList = tp_last_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+  
+  tp_mean_pair:
+    command: runPairs(eList = tp_mean_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+  
+  tp_r1_pair:
+    command: runPairs(eList = tp_r1_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+  
+  tp_r2_pair:
+    command: runPairs(eList = tp_r2_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+  
+  tp_r3_pair:
+    command: runPairs(eList = tp_r3_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+  
+  tp_dv_pair:
+    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+  
+  tp_dv_fn_pair:
+    command: runPairs(eList = tp_dv_fn_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+  

@@ -1,0 +1,57 @@
+target_default: 19_prep_data_source_tests
+
+packages:
+  - EGRET
+  - dplyr
+  - lubridate
+
+include: 10_get_data.yml
+
+sources:
+  - 20_prep_data/code/data_prep_fxns.R
+  - 10_get_data/code/precip_fxns.R
+  
+targets:
+  19_prep_data_source_tests:
+    depends:
+      - tp_eList
+      - tp_first_eList
+      - tp_last_eList
+      - tp_r1_eList
+      - tp_r2_eList
+      - tp_r3_eList
+      - tp_dv_eList
+      - tp_dv_fn_eList
+  
+  # using all obs tp concentrations 
+  tp_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp)
+    
+  # using various subsets/summaries of observed concentrations
+  tp_first_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_first)
+    
+  tp_last_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_last)
+    
+  tp_mean_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_mean)
+    
+  tp_r1_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_last)
+    
+  tp_r2_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_last)
+    
+  tp_r3_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_last)
+    
+  # using daily values output by gclas
+  tp_dv_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_daily)
+    
+  # using fn daily values output by gclas
+  tp_dv_fn_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_daily_fn)
+      
+  

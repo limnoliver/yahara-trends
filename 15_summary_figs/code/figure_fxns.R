@@ -1,5 +1,6 @@
 library(dplyr)
 library(lubridate)
+library(ggplot2)
 
 combine_parameters <- function(tp, diss_p, ortho_p_filt, ortho_p_unfilt, ss) {
   all_dat <- bind_rows(tp, diss_p, ortho_p_filt, ortho_p_unfilt, ss) %>%
@@ -31,3 +32,39 @@ plot_n_per_year <- function(data, fig_name) {
   ggsave(fig_name, p, height = 6, width = 5)
 }
 
+plot_annual_loads <- function(data, fig_name) {
+  annual <- data %>%
+    mutate(year = dataRetrieval::calcWaterYear(Date)) %>%
+    group_by(year) %>%
+    summarize(annual_load = sum(tp_pounds), count = n()) %>%
+    filter(count > 364)
+  
+  p <- ggplot(annual, aes(x = year, y = annual_load)) +
+    geom_point() +
+    geom_line() +
+    geom_hline(yintercept = mean(annual$annual_load), linetype = 2)+
+    #geom_smooth(method = 'lm') +
+    theme_bw() +
+    labs(x = 'Water Year', y = 'TP Annual Load (pounds)')
+  
+  ggsave(fig_name, p,  height = 4, width = 6)
+}
+
+plot_annual_discharge <- function(data, fig_name) {
+  annual <- data %>%
+    mutate(year = dataRetrieval::calcWaterYear(Date)) %>%
+    group_by(year) %>%
+    summarize(annual_dis = sum(Q), count = n()) %>%
+    filter(count > 364)
+  
+  p <- ggplot(annual, aes(x = year, y = annual_dis)) +
+    geom_point() +
+    geom_line() +
+    geom_hline(yintercept = mean(annual$annual_dis), linetype = 2)+
+    #geom_smooth(method = 'lm') +
+    theme_bw() +
+    labs(x = 'Water Year', y = 'Annual Discharge')
+  
+  ggsave(fig_name, p, height = 4, width = 6)
+    
+}

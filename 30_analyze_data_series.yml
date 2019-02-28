@@ -12,14 +12,14 @@ sources:
 targets:
   30_analyze_data:
     depends:
-      - tp_seasonal_conc_figure
-      - tp_seasonal_flux_figure
+      #- tp_seasonal_conc_figure
+      #- tp_seasonal_flux_figure
       - tp_wy_dv_conc_figure
       - tp_wy_dv_flux_figure
-      - ss_seasonal_conc_figure
-      - ss_wy_conc_figure
-      - ss_seasonal_flux_figure
-      - ss_wy_flux_figure
+      #- ss_seasonal_conc_figure
+      #- ss_wy_conc_figure
+      #- ss_seasonal_flux_figure
+      #- ss_wy_flux_figure
 
   tp_wy_out:
     command: runSeries(eList = tp_eList, windowSide = I(7), paStart = 10, paLong = 12)

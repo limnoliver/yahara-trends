@@ -24,13 +24,29 @@ targets:
 
   discharge_eList:
     command: as.egret(INFO = discharge_info, Daily = discharge)
-    
+  
+  # using all obs tp concentrations 
   tp_eList:
     command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp)
     
+  # using various subsets/summaries of observed concentrations
+  tp_first_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_first)
+    
+  tp_last_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_last)
+    
+  tp_mean_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_mean)
+    
+  tp_first_eList:
+    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_last)
+    
+  # using daily values output by gclas
   tp_dv_eList:
     command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_daily)
     
+  # using fn daily values output by gclas
   tp_dv_fn_eList:
     command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_daily_fn)
       

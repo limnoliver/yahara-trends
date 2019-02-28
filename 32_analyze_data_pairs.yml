@@ -24,7 +24,10 @@ targets:
       - ss_fall_pairs_out_boot
 
   tp_wy_pairs_out:
-    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2016))
+    command: runPairs(eList = tp_dv_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
+    
+  tp_wy_pairs_out_fns:
+    command: runPairs(eList = tp_dv_eList, windowSide = I(0), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
     
   tp_wy_pairs_boot:
     command: runPairsBoot(eList = tp_dv_eList, pairResults = tp_wy_pairs_out)

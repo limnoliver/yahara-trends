@@ -16,9 +16,17 @@ targets:
     depends:
       - all_parameters
       - figures/n_obs_per_year.png
+      - figures/load_per_year_gclas.png
+      - figures/annual_discharge.png
      
   all_parameters:
     command: combine_parameters(tp, diss_p, ortho_p_filt, ortho_p_unfilt, ss)
   
   figures/n_obs_per_year.png:
     command: plot_n_per_year(data = all_parameters, fig_name = target_name)
+    
+  figures/load_per_year_gclas.png:
+    command: plot_annual_loads(data = tp_loads_gclas, fig_name = target_name)
+    
+  figures/annual_discharge.png:
+    command: plot_annual_discharge(data = discharge, fig_name = target_name)
