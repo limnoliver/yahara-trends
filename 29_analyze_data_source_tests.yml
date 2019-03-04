@@ -3,24 +3,18 @@ target_default: 29_analyze_data_source_tests
 packages:
   - EGRET
   - EGRETci
+  - ggplot2
+  - dplyr
 
 include: 19_prep_data_source_tests.yml
 
 sources:
-  - 30_analyze_data/code/plot_conc_flux.R
+  - 29_analyze_data_source_tests/compare_data_sources.R
   
 targets:
   29_analyze_data_source_tests:
     depends:
-      - tp_pair
-      - tp_first_pair
-      - tp_last_pair
-      - tp_mean_pair
-      - tp_r1_pair
-      - tp_r2_pair
-      - tp_r3_pair
-      - tp_dv_pair
-      - tp_dv_fn_pair
+      - figures/data_source_comparison.png
       
   # pairs tests
   tp_pair:
@@ -50,3 +44,5 @@ targets:
   tp_dv_fn_pair:
     command: runPairs(eList = tp_dv_fn_eList, windowSide = I(7), paStart = I(10), paLong = I(12), year1 = I(1991), year2 = I(2017))
   
+  figures/data_source_comparison.png:
+    command: compare_dat_inputs(target_name)
