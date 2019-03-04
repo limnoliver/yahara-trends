@@ -5,7 +5,8 @@ packages:
   - dplyr
   - lubridate
 
-include: 15_summary_figs.yml
+include:
+  - 19_prep_data_source_tests.yml
 
 sources:
   - 20_prep_data/code/data_prep_fxns.R
@@ -15,43 +16,23 @@ targets:
   20_prep_data:
     depends:
       - discharge_eList
-      - tp_dv_eList
+      - tp_eList
       - ortho_p_filt_eList
       - p_combo_eList
-      - ss_dv_eList
+      - ss_eList
       - 20_prep_data/out/yearly_precip.csv
       - 20_prep_data/out/monthly_precip.csv
 
   discharge_eList:
     command: as.egret(INFO = discharge_info, Daily = discharge)
   
-  # using all obs tp concentrations 
+  # tp using mean of observations
   tp_eList:
-    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp)
-    
-  # using various subsets/summaries of observed concentrations
-  tp_first_eList:
-    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_first)
-    
-  tp_last_eList:
-    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_last)
-    
-  tp_mean_eList:
     command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_mean)
-    
-  tp_first_eList:
-    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_last)
-    
-  # using daily values output by gclas
-  tp_dv_eList:
-    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_daily)
-    
-  # using fn daily values output by gclas
-  tp_dv_fn_eList:
-    command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp_daily_fn)
-      
+ 
+  # orthop   
   ortho_p_filt_eList:
-    command: mergeReport(INFO = ortho_p_filt_info, Daily = discharge, Sample = ortho_p_filt)
+    command: mergeReport(INFO = ortho_p_filt_info, Daily = discharge, Sample = ortho_p_filt_mean)
   
   p_combo:
     command: combine_p_dat(diss_p, ortho_p_filt, ortho_p_unfilt)
@@ -60,10 +41,7 @@ targets:
     command: mergeReport(INFO = ortho_p_filt_info, Daily = discharge, Sample = p_combo)
     
   ss_eList:
-    command: mergeReport(INFO = ss_info, Daily = discharge, Sample = ss)
-    
-  ss_dv_eList:
-    command: mergeReport(INFO = ss_info, Daily = discharge, Sample = ss_daily)
+    command: mergeReport(INFO = ss_info, Daily = discharge, Sample = ss_mean)
     
   yearly_precip:
     command: summarize_yearly(precip_dat = msn_precip)
