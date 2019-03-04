@@ -14,6 +14,8 @@ combine_parameters <- function(tp, diss_p, ortho_p_filt, ortho_p_unfilt, ss) {
 }
 plot_n_per_year <- function(data, fig_name) {
   summary_dat <- data %>%
+    group_by(Date, parameter) %>%
+    summarize(count = n()) %>%
     mutate(year = year(Date)) %>%
     group_by(year, parameter) %>%
     summarize(count = n())
