@@ -5,7 +5,8 @@ packages:
   - dplyr
   - lubridate
 
-include: 10_get_data.yml
+include: 
+  - 12_get_data_subset_tests.yml
 
 sources:
   - 20_prep_data/code/data_prep_fxns.R
@@ -14,7 +15,7 @@ sources:
 targets:
   19_prep_data_source_tests:
     depends:
-      - tp_eList
+      - tp_all_eList
       - tp_first_eList
       - tp_last_eList
       - tp_r1_eList
@@ -24,7 +25,7 @@ targets:
       - tp_dv_fn_eList
   
   # using all obs tp concentrations 
-  tp_eList:
+  tp_all_eList:
     command: mergeReport(INFO = tp_info, Daily = discharge, Sample = tp)
     
   # using various subsets/summaries of observed concentrations
