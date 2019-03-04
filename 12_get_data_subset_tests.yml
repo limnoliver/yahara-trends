@@ -1,0 +1,55 @@
+target_default: 12_get_data_subset_tests
+
+packages:
+  - dataRetrieval
+  - yaml
+  - EGRET
+  - dplyr
+  
+sources:
+  - 10_get_data/code/filter_raw_conc.R
+  
+include:
+  - 10_get_data.yml
+  
+targets:
+  12_get_data_subset_tests:
+    depends:
+      - tp_first
+      - tp_last
+      - tp_mean
+      - tp_r1
+      - tp_r2
+      - tp_r3
+      - ortho_p_filt_mean
+      - ss_mean
+      
+  # use raw TP conc data, but take first/last value
+  tp_first:
+    command: subset_raw_conc(tp, stat = I('first'))
+    
+  tp_last:
+    command: subset_raw_conc(tp, stat = I('last'))
+    
+  # use raw TP conc data, but take mean of values
+  tp_mean:
+    command: subset_raw_conc(tp, stat = I('mean'))
+  
+  # use raw TP conc data, but randomly select 1 obs per day
+  # do this 3 times to compare results
+  tp_r1:
+    command: subset_raw_conc(tp, stat = I('random'))
+    
+  tp_r2:
+    command: subset_raw_conc(tp, stat = I('random'))
+    
+  tp_r3:
+    command: subset_raw_conc(tp, stat = I('random'))
+  
+  # mean values appeared to work, so summarize to mean values
+  ortho_p_filt_mean:
+    command: subset_raw_conc(ortho_p_filt, stat = I('mean'))
+    
+  ss_mean:
+    command: subset_raw_conc(ss, stat = I('mean'))
+    
