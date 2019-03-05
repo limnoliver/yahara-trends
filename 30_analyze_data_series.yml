@@ -14,8 +14,11 @@ targets:
   30_analyze_data:
     depends:
       - tp_wy_out
+      - tp_wy_out_boot
       - ss_wy_out
+      - ss_wy_out_boot
       - ortho_p_filt_wy_out
+      - ortho_p_filt_wy_out_boot
 
   tp_wy_out:
     command: runSeries(eList = tp_eList, windowSide = I(7), paStart = 10, paLong = 12)
