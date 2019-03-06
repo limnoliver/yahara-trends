@@ -1,0 +1,7 @@
+"parameter_cd","parameter_group_nm","parameter_nm","casrn","srsname","parameter_units"
+"00061","Physical","Discharge, instantaneous, cubic feet per second",NA,"Stream flow, instantaneous","ft3/s"
+"00665","Nutrient","Phosphorus, water, unfiltered, milligrams per liter as phosphorus","7723-14-0","Phosphorus","mg/l as P"
+"00666","Nutrient","Phosphorus, water, filtered, milligrams per liter as phosphorus","7723-14-0","Phosphorus","mg/l as P"
+"00671","Nutrient","Orthophosphate, water, filtered, milligrams per liter as phosphorus","14265-44-2","Phosphate","mg/l as P"
+"70507","Nutrient","Orthophosphate, water, unfiltered, milligrams per liter as phosphorus","14265-44-2","Phosphate","mg/l as P"
+"80154","Sediment","Suspended sediment concentration, milligrams per liter",NA,"Suspended sediment concentration (SSC)","mg/l"
