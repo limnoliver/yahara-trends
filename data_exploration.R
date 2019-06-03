@@ -1,6 +1,7 @@
 # plot flow normalized esimates
 
-tp <- make('tp_wy_out', remake_file = '30_analyze_data_series.yml')
+tp <- make('tp_eList', remake_file = '20_prep_data.yml')
+tp_march <- make('tp_groups_mar', remake_file = '34_analyze_data_groups_monthly.yml')
 
 tp_bands <- tidyr::gather(tp_wy_out_boot, key = 'variable', value = 'value', -Year)
 tp_bands_flux <- filter(tp_bands, variable %in% c('FNFluxLow', 'FNFluxHigh'))
@@ -19,8 +20,13 @@ plotContours(tp, yearStart = 1991, yearEnd = 2018,
              qTop = 1.7)
 
 # how has the relationship between conc and Q changed?
-plotConcQSmooth(tp, date1="1991-01-01",
-                date2="2004-01-01",date3="2018-01-01",
+plotConcQSmooth(tp, date1="1995-03-15",
+                date2="2005-03-15",date3="2015-03-15",
+                qLow=0.2,qHigh=10, logScale=TRUE,
+                legendLeft=2,legendTop=0.2,printTitle=FALSE)
+
+plotConcQSmooth(tp_march, date1="1995-03-15",
+                date2="2005-03-15",date3="2015-03-15",
                 qLow=0.2,qHigh=10, logScale=TRUE,
                 legendLeft=2,legendTop=0.2,printTitle=FALSE)
 
@@ -115,3 +121,39 @@ ggplot(tp_n_events_50, aes(x = day, y = cumulative_prop_total)) +
   coord_cartesian(xlim = c(0, 50))
 
 plot(tp_n_events_50$cumulative_prop_total ~ c(1:365))
+
+## same thing for Q
+Q <- make('tp_wy_out', remake_file = '30_analyze_data_series.yml')
+q_n_events_50 <- Q$Daily %>%
+  mutate(doy = lubridate::yday(Date),
+         monthday = format(Date, format = '%m-%d'),
+         month = lubridate::month(Date, label = TRUE)) %>%
+  #filter(waterYear == 2018) %>%
+  arrange(waterYear, -Q) %>%
+  group_by(waterYear) %>%
+  mutate(prop_total = Q/sum(Q)) %>%
+  mutate(cumulative_prop_total = cumsum(prop_total),
+         day = rank(-prop_total)) %>%
+  ungroup() %>%
+  select(waterYear, doy, day, monthday, month, cumulative_prop_total, prop_total)
+
+daily_prop_total <- group_by(tp_n_events_50, doy) %>%
+  summarize(prop_total_median = median(prop_total),
+            prop_total_90 = quantile(prop_total, 0.9),
+            prop_total_10 = quantile(prop_total, 0.1),
+            prop_total_mean = mean(prop_total)) %>%
+  mutate(rolling_mean = zoo::rollmean(prop_total_median, 14, na.pad = TRUE))
+
+
+p3 <- ggplot(daily_prop_total, aes(x = doy, y = prop_total_mean)) +
+  geom_rect(aes(xmin = 43, xmax = 115, ymin = -Inf, ymax = Inf), fill = 'lightgray', alpha = 0.1) +
+  geom_rect(aes(xmin = 153, xmax = 180, ymin = -Inf, ymax = Inf), fill = 'lightgray', alpha = 0.1) +
+  geom_point(color = 'darkgray', alpha = 0.8) +
+  scale_x_continuous(breaks = c(1,60, 121, 182,244, 305), 
+                     labels = c('Jan 1', 'March 1', 'May 1', 'Jul 1', 'Sep 1', 'Nov 1')) +
+  geom_line(aes(y = zoo::rollmean(prop_total_mean, 14, na.pad = TRUE)), color = 'red') +
+  theme_bw() +
+  labs(x = '', y = "Proportion of annual discharge (1990-2018)")
+
+ggsave('figures/daily_prop_annual_discharge_mean.png', p3, height = 4, width = 6)
+
