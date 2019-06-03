@@ -53,34 +53,34 @@ targets:
     command: runGroupsBoot(eList = tp_dv_eList, groupResults = tp_fall_groups_out, nBoot = 100)
 
   ss_wy_groups_out:
-    command: runGroups(eList = ss_dv_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 100, paLong = 12)
+    command: runGroups(eList = ss_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 100, paLong = 12)
     
   ss_winter_groups_out:
-    command: runGroups(eList = ss_dv_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 12, paLong = 3)
+    command: runGroups(eList = ss_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 12, paLong = 3)
     
   ss_spring_groups_out:
-    command: runGroups(eList = ss_dv_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 3, paLong = 3)
+    command: runGroups(eList = ss_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 3, paLong = 3)
     
   ss_summer_groups_out:
-    command: runGroups(eList = ss_dv_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 6, paLong = 3)
+    command: runGroups(eList = ss_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 6, paLong = 3)
     
   ss_fall_groups_out:
-    command: runGroups(eList = ss_dv_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 9, paLong = 3)
+    command: runGroups(eList = ss_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 9, paLong = 3)
   
   ss_wy_groups_out_boot:
-    command: runGroupsBoot(eList = ss_dv_eList, groupResults = ss_wy_groups_out, nBoot = 100)
+    command: runGroupsBoot(eList = ss_eList, groupResults = ss_wy_groups_out, nBoot = 100)
 
   ss_winter_groups_out_boot:
-    command: runGroupsBoot(eList = ss_dv_eList, groupResults = ss_winter_groups_out, nBoot = 100)
+    command: runGroupsBoot(eList = ss_eList, groupResults = ss_winter_groups_out, nBoot = 100)
 
   ss_spring_groups_out_boot:
-    command: runGroupsBoot(eList = ss_dv_eList, groupResults = ss_spring_groups_out, nBoot = 100)
+    command: runGroupsBoot(eList = ss_eList, groupResults = ss_spring_groups_out, nBoot = 100)
 
   ss_summer_groups_out_boot:
-    command: runGroupsBoot(eList = ss_dv_eList, groupResults = ss_summer_groups_out, nBoot = 100)
+    command: runGroupsBoot(eList = ss_eList, groupResults = ss_summer_groups_out, nBoot = 100)
 
   ss_fall_groups_out_boot:
-    command: runGroupsBoot(eList = ss_dv_eList, groupResults = ss_fall_groups_out, nBoot = 100)
+    command: runGroupsBoot(eList = ss_eList, groupResults = ss_fall_groups_out, nBoot = 100)
   
   ortho_p_filt_wy_groups_out:
     command: runGroups(eList = ortho_p_filt_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2017),windowSide = I(7), paStart = 100, paLong = 12)

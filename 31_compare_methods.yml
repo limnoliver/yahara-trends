@@ -3,7 +3,7 @@ target_default: 31_compare_methods
 packages:
   - EGRET
 
-include: 30_analyze_data.yml
+include: 30_analyze_data_series.yml
 
 sources:
   - 30_analyze_data/code/plot_conc_flux.R

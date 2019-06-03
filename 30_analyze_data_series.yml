@@ -5,7 +5,7 @@ packages:
   - EGRETci
 
 include:
-  - 20_prep_data.yml
+  - 29_analyze_data_source_tests.yml
 
 sources:
   - 30_analyze_data/code/plot_conc_flux.R
