@@ -1,0 +1,97 @@
+target_default: 34_analyze_data_groups_monthly
+
+packages:
+  - EGRET
+  - EGRETci
+
+include: 33_analyze_data_groups.yml
+
+sources:
+  
+targets:
+  34_analyze_data_groups_monthly:
+    depends:
+      - tp_groups_boot_jan
+      - tp_groups_boot_feb
+      - tp_groups_boot_mar
+      - tp_groups_boot_apr
+      - tp_groups_boot_may
+      - tp_groups_boot_jun
+      - tp_groups_boot_jul
+      - tp_groups_boot_aug
+      - tp_groups_boot_sep
+      - tp_groups_boot_oct
+      - tp_groups_boot_nov
+      - tp_groups_boot_dec
+
+  tp_groups_jan:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(1), paLong = I(1))
+    
+  tp_groups_boot_jan:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_jan, nBoot = 100)
+    
+  tp_groups_feb:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(2), paLong = I(1))
+    
+  tp_groups_boot_feb:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_feb, nBoot = 100)
+    
+  tp_groups_mar:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(3), paLong = I(1))
+    
+  tp_groups_boot_mar:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_mar, nBoot = 100)
+    
+  tp_groups_apr:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(4), paLong = I(1))
+    
+  tp_groups_boot_apr:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_apr, nBoot = 100)
+    
+  tp_groups_may:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(5), paLong = I(1))
+    
+  tp_groups_boot_may:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_may, nBoot = 100)
+    
+  tp_groups_jun:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(6), paLong = I(1))
+    
+  tp_groups_boot_jun:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_jun, nBoot = 100)
+   
+  tp_groups_jul:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(7), paLong = I(1))
+    
+  tp_groups_boot_jul:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_jul, nBoot = 100)
+
+  tp_groups_aug:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(8), paLong = I(1))
+    
+  tp_groups_boot_aug:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_aug, nBoot = 100)
+  
+  tp_groups_sep:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(9), paLong = I(1))
+    
+  tp_groups_boot_sep:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_sep, nBoot = 100)
+    
+  tp_groups_oct:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(10), paLong = I(1))
+    
+  tp_groups_boot_oct:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_oct, nBoot = 100)
+    
+  tp_groups_nov:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(11), paLong = I(1))
+    
+  tp_groups_boot_nov:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_nov, nBoot = 100)
+    
+  tp_groups_dec:
+    command: runGroups(eList = tp_eList, group1firstYear = I(1990), group1lastYear = I(2004), group2firstYear = I(2006), group2lastYear = I(2018),windowSide = I(7), paStart = I(12), paLong = I(1))
+    
+  tp_groups_boot_dec:
+    command: runGroupsBoot(eList = tp_eList, groupResults = tp_groups_dec, nBoot = 100)  
