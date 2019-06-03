@@ -37,7 +37,7 @@ create_monthly_fig <- function(fig_dat, fig_name, fig_height, fig_width, type) {
                            conc_est_cqtc = all_month_dat$CQTC[all_month_dat$type == 'Flux']*1000000*2.205, 
                            conc_est_qtc = all_month_dat$QTC[all_month_dat$type == 'Flux']*1000000*2.205)
     
-    y_label <- 'Change in Flux (pounds/year)'
+    y_label <- 'Change in Monthly Flux (pounds)'
   }  else {
     plot_dat <- data.frame(month = factor(gsub('tp_groups_boot_', '', all_boot_dat$month), levels=gsub('tp_groups_boot_', '', all_boot_dat$month)) ,
                            conc_est = 100*all_boot_dat$estC/all_boot_dat$baseConc,
