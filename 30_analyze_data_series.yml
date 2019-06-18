@@ -3,58 +3,103 @@ target_default: 30_analyze_data
 packages:
   - EGRET
   - EGRETci
+  - ggplot2
+  - dplyr
+  - cowplot
 
 include:
   - 29_analyze_data_source_tests.yml
 
 sources:
   - 30_analyze_data/code/plot_conc_flux.R
+  - 30_analyze_data/code/model_diagnostic_plots.R
+  - 30_analyze_data/code/create_four_panel_summary.R
   
 targets:
   30_analyze_data:
     depends:
-      - tp_wy_out
-      - tp_wy_out_boot
-      - ss_wy_out
-      - ss_wy_out_boot
-      - ortho_p_filt_wy_out
-      - ortho_p_filt_wy_out_boot
+      - figures/series/tp_conc_four_panel_plot.png
+      - figures/series/tp_flux_four_panel_plot.png
+      - figures/series/ss_conc_four_panel_plot.png
+      - figures/series/ss_flux_four_panel_plot.png
+      - figures/series/ortho_p_conc_four_panel_plot.png
+      - figures/series/ortho_p_flux_four_panel_plot.png
 
+  ##############
+  # TP analysis
+  ##############
+  # need to use the old modelEstimation in order to show residual plots. To do that, need to run
+  # modelEstimation, then runSeries using old surface. Should be the same as just doing runSeries.
+  tp_mest_eList:
+    command: modelEstimation(eList = tp_eList)
+    
+  tp_wy_out_old:
+    command: runSeries(eList = tp_mest_eList, windowSide = I(7), paStart = I(10), paLong = I(12), oldSurface = I(TRUE))
+  
+  # try narrowing the season window to remove monthly bias   
+  tp_wy_out_ws1:
+    command: runSeries(eList = tp_mest_eList, windowSide = I(7), windowS = I(0.1), paStart = I(10), paLong = I(12), oldSurface = I(TRUE))
+    
+  # output model residuals
+  figures/model_evaluation/tp_flux_bias_multi.pdf:
+    command: create_bias_plot(tp_wy_out_old, target_name)
+    
+  figures/model_evaluation/tp_flux_bias_multi_ws1.pdf:
+    command: create_bias_plot(tp_wy_out_old, target_name)
+    
+  # run series and bootstrap
   tp_wy_out:
-    command: runSeries(eList = tp_eList, windowSide = I(7), paStart = 10, paLong = 12)
+    command: runSeries(eList = tp_eList, windowSide = I(7), paStart = I(10), paLong = I(12))
     
   tp_wy_out_boot: 
     command: ciCalculations(eList = tp_wy_out, nBoot = I(100), blockLength = I(200), widthCI = I(90))
     
+  # run windowSide = 0 for comparison
+  tp_wy_out_stationary:
+    command: runSeries(eList = tp_eList, windowSide = I(0), paStart = I(10), paLong = I(12))
+    
+  # four-panel plot from murphy paper
+  
+  figures/series/tp_conc_four_panel_plot.png:
+    command: plot_four_panels(file_name = target_name, gen = tp_wy_out, fixed = tp_wy_out_stationary, conc = I(TRUE))
+  
+  figures/series/tp_flux_four_panel_plot.png:
+    command: plot_four_panels(file_name = target_name, gen = tp_wy_out, fixed = tp_wy_out_stationary, conc = I(FALSE))
+  
+  #######################
+  # suspended sediment #
+  #######################
+  
   ss_wy_out:
     command: runSeries(eList = ss_eList, windowSide = I(7), paStart = 10, paLong = 12)
     
   ss_wy_out_boot:
     command: ciCalculations(eList = ss_wy_out, nBoot = I(100), blockLength = I(200), widthCI = I(90))
-    
+   
+  ss_wy_out_stationary:
+    command: runSeries(eList = ss_eList, windowSide = I(0), paStart = I(10), paLong = I(12))
+  
+  figures/series/ss_conc_four_panel_plot.png:
+    command: plot_four_panels(file_name = target_name, gen = ss_wy_out, fixed = ss_wy_out_stationary, conc = I(TRUE))
+  
+  figures/series/ss_flux_four_panel_plot.png:
+    command: plot_four_panels(file_name = target_name, gen = ss_wy_out, fixed = ss_wy_out_stationary, conc = I(FALSE))
+  
+  ############
+  # ortho P #
+  ############
+  
   ortho_p_filt_wy_out:
     command: runSeries(eList = ortho_p_filt_eList, windowSide = I(7), paStart = 10, paLong = 12, surfaceStart = I('1993-03-07'))
     
   ortho_p_filt_wy_out_boot:
     command: ciCalculations(eList = ortho_p_filt_wy_out, nBoot = I(100), blockLength = I(200), widthCI = I(90))
-   
-
-  #ss_seasons_out: 
-   # command: list(ss_winter_out_boot, ss_spring_out_boot, ss_summer_out_boot, ss_fall_out_boot)
-    
-  #ss_seasons_eList: 
-   # command: list(ss_winter_out, ss_spring_out, ss_summer_out, ss_fall_out)
   
-  #ss_seasonal_conc_figure:
-   # command: construct_conc_fig(eList_out = ss_seasons_eList, mod_out = ss_seasons_out, type = I('seasonal'), constituent = I('SS'), file_name = I('figures/ss_seasonal_conc_trends.png'))
-    
-  #ss_wy_conc_figure:
-   # command: construct_conc_fig(eList_out = ss_wy_dv_out, mod_out = ss_wy_dv_out_boot, type = I('wy'), constituent = I('SS'), file_name = I('figures/ss_wy_conc_trends.png'))
-    
-  #ss_seasonal_flux_figure:
-   # command: construct_flux_fig(eList_out = ss_seasons_eList, mod_out = ss_seasons_out, type = I('seasonal'), constituent = I('SS'), file_name = I('figures/ss_seasonal_flux_trends.png'))
-    
-  #ss_wy_flux_figure:
-   # command: construct_flux_fig(eList_out = ss_wy_dv_out, mod_out = ss_wy_dv_out_boot, type = I('wy'), constituent = I('SS'), file_name = I('figures/ss_wy_flux_trends.png'))
+  ortho_p_filt_wy_out_stationary:
+    command: runSeries(eList = ortho_p_filt_eList, windowSide = I(0), paStart = I(10), paLong = I(12))
   
- 
+  figures/series/ortho_p_conc_four_panel_plot.png:
+    command: plot_four_panels(file_name = target_name, gen = ortho_p_filt_wy_out, fixed = ortho_p_filt_wy_out_stationary, conc = I(TRUE))
+  
+  figures/series/ortho_p_flux_four_panel_plot.png:
+    command: plot_four_panels(file_name = target_name, gen = ortho_p_filt_wy_out, fixed = ortho_p_filt_wy_out_stationary, conc = I(FALSE))
