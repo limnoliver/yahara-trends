@@ -31,19 +31,19 @@ targets:
     command: runSeries(eList = tp_eList, windowSide = I(0), paStart = 10, paLong = 12)
     
   tp_wy_conc_5_figure:
-    command: construct_conc_fig(mod_out = tp_wy_out_5, type = I('wy'), constituent = I('TP'), file_name = I('figures/tp_wy_conc_5_trends.png'))
+    command: construct_conc_fig(mod_out = tp_wy_out_5, type = I('wy'), constituent = I('TP'), file_name = I('figures/windowSide_tests/tp_wy_conc_5_trends.png'))
 
   tp_wy_conc_10_figure:
-    command: construct_conc_fig(mod_out = tp_wy_out_10, type = I('wy'), constituent = I('TP'), file_name = I('figures/tp_wy_conc_10_trends.png'))
+    command: construct_conc_fig(mod_out = tp_wy_out_10, type = I('wy'), constituent = I('TP'), file_name = I('figures/windowSide_tests/tp_wy_conc_10_trends.png'))
 
   tp_wy_conc_0_figure:
-    command: construct_conc_fig(mod_out = tp_wy_out_0, type = I('wy'), constituent = I('TP'), file_name = I('figures/tp_wy_conc_0_trends.png'))
+    command: construct_conc_fig(mod_out = tp_wy_out_0, type = I('wy'), constituent = I('TP'), file_name = I('figures/windowSide_tests/tp_wy_conc_0_trends.png'))
     
   tp_wy_flux_5_figure:
-    command: construct_flux_fig(mod_out = tp_wy_out_5, type = I('wy'), constituent = I('TP'), file_name = I('figures/tp_wy_flux_5_trends.png'))
+    command: construct_flux_fig(mod_out = tp_wy_out_5, type = I('wy'), constituent = I('TP'), file_name = I('figures/windowSide_tests/tp_wy_flux_5_trends.png'))
   
   tp_wy_flux_10_figure:
-    command: construct_flux_fig(mod_out = tp_wy_out_10, type = I('wy'), constituent = I('TP'), file_name = I('figures/tp_wy_flux_10_trends.png'))
+    command: construct_flux_fig(mod_out = tp_wy_out_10, type = I('wy'), constituent = I('TP'), file_name = I('figures/windowSide_tests/tp_wy_flux_10_trends.png'))
   
   tp_wy_flux_0_figure:
-    command: construct_flux_fig(mod_out = tp_wy_out_0, type = I('wy'), constituent = I('TP'), file_name = I('figures/tp_wy_flux_0_trends.png'))
+    command: construct_flux_fig(mod_out = tp_wy_out_0, type = I('wy'), constituent = I('TP'), file_name = I('figures/windowSide_tests/tp_wy_flux_0_trends.png'))
