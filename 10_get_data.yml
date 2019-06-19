@@ -31,6 +31,7 @@ targets:
       - 10_get_data/out/msn_precip.csv
       - 10_get_data/out/tp_conc_gclas.csv
 
+  # read in configuration details, like pcodes, site numbers, etc.
   config:
     command: yaml.load_file('10_get_data/config/dataRetrieval_config.yml')
       
@@ -106,6 +107,7 @@ targets:
   ss_daily:
     command: get_daily_ss(start = start_date, end = end_date, site  = site_no, pcode = I('80154'), ss_samples = ss)
     
+  # read in precip data - provided by Dale R. 
   msn_precip:
     command: get_precip(file_loc = '10_get_data/raw/msn_weather_record.csv')
     
