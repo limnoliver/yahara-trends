@@ -79,6 +79,17 @@ targets:
   ss_wy_out_stationary:
     command: runSeries(eList = ss_eList, windowSide = I(0), paStart = I(10), paLong = I(12))
   
+  ss_mest_eList:
+    command: modelEstimation(eList = ss_eList)
+    
+  ss_wy_out_old:
+    command: runSeries(eList = ss_mest_eList, windowSide = I(7), paStart = I(10), paLong = I(12), oldSurface = I(TRUE))
+  
+  # output model residuals
+  figures/model_evaluation/ss_flux_bias_multi.pdf:
+    command: create_bias_plot(ss_wy_out_old, target_name)
+    
+  # other figs
   figures/series/ss_conc_four_panel_plot.png:
     command: plot_four_panels(file_name = target_name, gen = ss_wy_out, fixed = ss_wy_out_stationary, conc = I(TRUE))
   
@@ -98,6 +109,17 @@ targets:
   ortho_p_filt_wy_out_stationary:
     command: runSeries(eList = ortho_p_filt_eList, windowSide = I(0), paStart = I(10), paLong = I(12))
   
+  ortho_p_filt_mest_eList:
+    command: modelEstimation(eList = ortho_p_filt_eList)
+    
+  ortho_p_filt_wy_out_old:
+    command: runSeries(eList = ortho_p_filt_mest_eList, windowSide = I(7), paStart = I(10), paLong = I(12), oldSurface = I(TRUE))
+  
+  # output model residuals
+  figures/model_evaluation/ortho_p_flux_bias_multi.pdf:
+    command: create_bias_plot(ortho_p_filt_wy_out_old, target_name)
+    
+  # other figs
   figures/series/ortho_p_conc_four_panel_plot.png:
     command: plot_four_panels(file_name = target_name, gen = ortho_p_filt_wy_out, fixed = ortho_p_filt_wy_out_stationary, conc = I(TRUE))
   
