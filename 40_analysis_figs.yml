@@ -10,11 +10,18 @@ sources:
   - 30_analyze_data/code/plot_conc_flux.R
   - 40_analysis_figs/src/plot_monthly_change.R
   - 40_analysis_figs/src/plot_annuals.R
+  - 40_analysis_figs/src/plot_change_conditions.R
   
 targets:
   40_analysis_figs:
     depends:
-      - monthly_targets
+      - figures/monthly_fig_conc.png
+      - figures/series/tp_contour_plot.png
+      - figures/series/tp_conditions_panel_plot.png
+      - figures/series/ss_contour_plot.png
+      - figures/series/ss_conditions_panel_plot.png
+      - figures/series/ortho_p_contour_plot.png
+      - figures/series/ortho_p_conditions_panel_plot.png
 
   all_targets:
     command: list_targets(remake_file = '34_analyze_data_groups_monthly.yml')
@@ -39,4 +46,59 @@ targets:
   
   figures/annual_ss_flux.png:
     command: plot_flux_annuals(target_name, ss_wy_out, ss_wy_out_boot, unit = 8)
-       
+    
+  # under which conditions figures
+  # this combines the contour plot + slices of that plot into multiple panels
+  # for each constituent
+  
+  # TP
+  tp_breaks: 
+    command: seq(0,0.8,0.1)
+    
+  figures/series/tp_contour_plot.png:
+    command: plot_contours(tp_wy_out, target_name, conc_breaks = tp_breaks)
+    
+  qval:
+    command: calc_probs(tp_wy_out, probs = I(c(0.5, 0.9, 0.99)))
+    
+  figures/series/tp_conditions_panel_plot.png:
+    command: plot_conditions(
+      file_name = target_name,
+      eList = tp_wy_out, 
+      year1 = I(1992), year2 = I(2005), year3 = I(2018), 
+      date1 = I('03-15'), date2 = I('06-15'), 
+      qlegend = I(c(0.3, 1.5)), tlegend = I(c(1991, 0.7)),
+      qvals = qval, conc_range1 = I(c(0.02, 2)), conc_range2 = I(c(0, 1.4)))
+  
+  # SS
+  ss_breaks: 
+    command: seq(0,400,50)
+    
+  figures/series/ss_contour_plot.png:
+    command: plot_contours(ss_wy_out, target_name, ss_breaks)
+    
+  figures/series/ss_conditions_panel_plot.png:
+    command: plot_conditions(
+      file_name = target_name,
+      eList = ss_wy_out, 
+      year1 = I(1992), year2 = I(2005), year3 = I(2018), 
+      date1 = I('03-15'), date2 = I('06-15'), 
+      qlegend = I(c(0.25, 1000)), tlegend = I(c(2005, 700)),
+      qvals = qval, conc_range1 = I(c(20, 2000)), conc_range2 = I(c(0,800)))
+      
+ # ortho_p
+  ortho_p_breaks: 
+    command: seq(0,0.6,0.05)
+    
+  figures/series/ortho_p_contour_plot.png:
+    command: plot_contours(ortho_p_filt_wy_out, target_name, ortho_p_breaks, yearStart = I(1993), yearEnd = I(2018))
+    
+  figures/series/ortho_p_conditions_panel_plot.png:
+    command: plot_conditions(
+      file_name = target_name,
+      eList = ortho_p_filt_wy_out, 
+      year1 = I(1993), year2 = I(2005), year3 = I(2018), 
+      date1 = I('03-15'), date2 = I('06-15'), 
+      qlegend = I(c(0.21, 0.9)), tlegend = I(c(2006.5, .68)),
+      qvals = qval, conc_range1 = I(c(0.01, 1)), conc_range2 = I(c(0,0.7)))
+            
