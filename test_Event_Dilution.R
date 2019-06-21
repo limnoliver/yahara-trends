@@ -168,7 +168,14 @@ mean = tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=m
 se = sd/sqrt(n)
 segments(b, (mean-se), b, (mean+se))
 
-###
+
+##################
+plotConcQSmooth(tp_mod, "1995-05-01",NA,"2015-05-01",0.2,10,logScale=TRUE,
+                legendLeft=3,legendTop=0.1,printTitle=TRUE, qUnit = 2)
+#additionally, the C-Q realtionship is loxer for almost the entire stage (except 0.2 which is <1st percentile [99th exceed]
+#of all Q). Dilution (e.g. supply limited watershed) seems unlikey. 
+
+###########################################################
 ########
 ################
 
