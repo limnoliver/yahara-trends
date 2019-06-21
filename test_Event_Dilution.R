@@ -176,8 +176,6 @@ plotConcQSmooth(tp_mod, "1995-05-01",NA,"2015-05-01",0.2,10,logScale=TRUE,
 #of all Q). Dilution (e.g. supply limited watershed) seems unlikey. 
 
 ###########################################################
-########
-################
 
 
 ###############################
