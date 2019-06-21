@@ -138,12 +138,49 @@ round(summary(lateLong)  $r.squared, digits = 2)
 round(summary(lateShort) $r.squared, digits = 2)
 
 
+
+
+################
+########
+###
+#Does the realtionship between C-Q depend on time between events and water year, can we remove artificial 
+#bifurcations and use continuous variables?
+#How to set this up?? 3-way interaction? 
+#make lag a numeric variable (done at approx line 60)
+summary(lm(log(days_since_last_event)~waterYear,summerSampleM))
+#days between events is decreasing
+#Ancova, not sure I'm doing/interpreting this correctly
+lagTimeEffect = aov(log(ConcAve)~log(Q)*log(days_since_last_event)*waterYear, summerSampleM)
+summary(lagTimeEffect)
+#effect of Q, days since last event and water year
+#No interction effects, C-Q slope does not depend on interaction of waterYear*days beteween events
+#Should we include all months or just focus on "summer"?
+
+b = barplot(tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=mean),
+        log = "y",
+        ylim = c(1,200),
+        ylab = "Mean Days Between Discharge Events",
+        xlab = "Water Year")
+
+sd =tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=sd)
+n =tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=length)
+mean = tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=mean)
+se = sd/sqrt(n)
+segments(b, (mean-se), b, (mean+se))
+
+###
+########
+################
+
+
 ###############################
 ######################
 ################
-#test effects edit:using categorical values, probably obsolete given anlysis below
 
-#Ancova, not sure I'm doing/interpreting this correctly
+
+
+
+#test effects edit:using categorical values, probably obsolete given anlysis with continuous variables
 summerSampleM$time = ifelse(summerSampleM$waterYear <2005, "early", "late")
 
 lagEffect = aov(log(ConcAve)~log(Q)*lag, summerSampleM)
@@ -179,40 +216,6 @@ summary(lagEffectPlus)
 print(anova(lagEffect,lagEffectPlus))
 # No interaction effect of lag on c~Q in early or late samples (although obvious directionality from plotting)
 # Although, Interaction effect of time if we include April in the analysis, depending on lag time cut off
-
-
-################
-########
-###
-#Does the realtionship between C-Q depend on time between events and water year, can we remove artificial 
-#bifurcations and use continuous variables?
-#How to set this up?? 3-way interaction? 
-#make lag a numeric variable (done at approx line 60)
-summary(lm(log(days_since_last_event)~waterYear,summerSampleM))
-#days between events is decreasing
-lagTimeEffect = aov(log(ConcAve)~log(Q)*log(days_since_last_event)*waterYear, summerSampleM)
-summary(lagTimeEffect)
-#effect of Q, days since last event and water year
-#No interction effects, C-Q slope does not depend on interaction of waterYear*days beteween events
-#Should we include all months or just focus on "summer"?
-
-b = barplot(tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=mean),
-        log = "y",
-        ylim = c(1,200),
-        ylab = "Mean Days Between Discharge Events",
-        xlab = "Water Year")
-
-sd =tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=sd)
-n =tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=length)
-mean = tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=mean)
-se = sd/sqrt(n)
-segments(b, (mean-se), b, (mean+se))
-
-###
-########
-################
-
-
 
 #End test effects
 ################
