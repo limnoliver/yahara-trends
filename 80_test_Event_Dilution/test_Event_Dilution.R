@@ -109,8 +109,8 @@ lateLong   = lm(log(ConcAve)~log(Q), summerSampleLateLong)
 lateShort  = lm(log(ConcAve)~log(Q), summerSampleLateShort)
 
 #png("80_test_Event_Dilution/CQ_EventLag_2Time.png", width = 600, height = 400)
-#2.62 99th percentile of observed log(Q) in summerSampleM (0.11 = log 1.12)
-plot(log(ConcAve)~log(Q), summerSampleM, col = 'snow3', xlim = c(0.11,2.62), ylim=c(-3.5,2))
+#2.62 99th percentile of observed log(Q) in summerSampleM (-0.11 = log 0.9)
+plot(log(ConcAve)~log(Q), summerSampleM, col = 'snow3', xlim = c(-0.11,2.62), ylim=c(-3.5,2))
 legend(1.1,-2.2, legend = c(
   paste("WY <  2005 event C~Q lag >",time, "days n=", nrow(summerSampleEarlyLong)),
   paste("WY <  2005 event C~Q lag <",time, "days n=", nrow(summerSampleEarlyShort)),
