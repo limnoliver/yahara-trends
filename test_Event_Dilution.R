@@ -39,7 +39,7 @@ for(j in 2:nrow(summerDaily)){
 ##############################################################
 #Timeframe that defines short&long, how to choose??
 #Run all of this code to rerun analysis and plots with different lag times
-time = 10
+time = 14
 #identify lags? Start of event to end of previous event
 summerDaily$lag = NA
 for(k in time:nrow(summerDaily)){
@@ -108,7 +108,6 @@ earlyShort = lm(log(ConcAve)~log(Q), summerSampleEarlyShort)
 lateLong   = lm(log(ConcAve)~log(Q), summerSampleLateLong)
 lateShort  = lm(log(ConcAve)~log(Q), summerSampleLateShort)
 
-#png("80_Event_Dilution/CQ_EventLag_2Time.png", width = 600, height = 400)
 #2.62 99th percentile of observed log(Q) in summerSampleM (0.11 = log 1.12)
 plot(log(ConcAve)~log(Q), summerSampleM, col = 'snow3', xlim = c(0.11,2.62), ylim=c(-3.5,2))
 legend(1.1,-2.2, legend = c(
@@ -122,20 +121,15 @@ legend(1.1,-2.2, legend = c(
   bg = "grey98",
   cex=0.8
 )
-  
-  abline(earlyLong, lwd=3, col="red4")
-  abline(earlyShort,lwd=3, col="red")
-  abline(lateLong,  lwd=3, col="steelblue4")
-  abline(lateShort, lwd=3, col="steelblue1")
-
-#dev.off()
-
 
 #points(log(ConcAve)~log(Q), summerSampleEarlyLong, col = 'red4')
 #points(log(ConcAve)~log(Q), summerSampleEarlyShort,col = 'red')
 #points(log(ConcAve)~log(Q), summerSampleLateLong,  col = 'steelblue4')
 #points(log(ConcAve)~log(Q), summerSampleLateShort, col = 'steelblue1')
-
+abline(earlyLong, lwd=3, col="red4")
+abline(earlyShort,lwd=3, col="red")
+abline(lateLong,  lwd=3, col="steelblue4")
+abline(lateShort, lwd=3, col="steelblue1")
 
 
 round(summary(earlyLong) $r.squared, digits = 2)
@@ -161,7 +155,7 @@ summary(lagTimeEffect)
 #effect of Q, days since last event and water year
 #No interction effects, C-Q slope does not depend on interaction of waterYear*days beteween events
 #Should we include all months or just focus on "summer"?
-#png("80_Event_Dilution/Mean_EventLag_Time.png", width = 600, height = 400)
+
 b = barplot(tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=mean),
         log = "y",
         ylim = c(1,200),
@@ -173,7 +167,7 @@ n =tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=lengt
 mean = tapply(summerSampleM$days_since_last_event,summerSampleM$waterYear, FUN=mean)
 se = sd/sqrt(n)
 segments(b, (mean-se), b, (mean+se))
-#dev.off()
+
 
 
 
@@ -181,11 +175,10 @@ segments(b, (mean-se), b, (mean+se))
 ######################
 ###############################
 ###########################################################
-#png("80_Event_Dilution/CQ_Two_Dates.png", width = 600, height = 400)
-plotConcQSmooth(tp_mod, "1995-06-01",NA,"2015-06-01",0.2,10,logScale=TRUE,
-                legendLeft=3,legendTop=0.11,printTitle=TRUE, qUnit = 2)
-#dev.off()
-#additionally, the C-Q realtionship is lower for almost the entire stage (except 0.2 which is <1st percentile [99th exceed]
+
+plotConcQSmooth(tp_mod, "1995-05-01",NA,"2015-05-01",0.2,10,logScale=TRUE,
+                legendLeft=3,legendTop=0.1,printTitle=TRUE, qUnit = 2)
+#additionally, the C-Q realtionship is loxer for almost the entire stage (except 0.2 which is <1st percentile [99th exceed]
 #of all Q). Dilution (e.g. supply limited watershed) seems unlikey. 
 
 ###########################################################
