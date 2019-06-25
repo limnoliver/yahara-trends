@@ -1,8 +1,9 @@
 
 
 #setwd("C:/Users/shuprmp/Documents/GitHub/yahara-trends")
-#library(remake)
-#library(EGRET)
+
+#Test save on origin
+
 
 tp_mod <- make('tp_wy_out', remake_file = '30_analyze_data_series.yml')
 
