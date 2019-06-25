@@ -8,7 +8,7 @@ tp_mod <- make('tp_wy_out', remake_file = '30_analyze_data_series.yml')
 
 sample = tp_mod$Sample
 #subset to 4 or 5 later, but keep for calculating lag time for earliest events
-#Could include all months instead of growing season
+#Could include all months instead of just "growing season"
 summerSample = subset (sample, Month >3 & Month <11)
 
 daily = tp_mod$Daily
@@ -26,7 +26,7 @@ for(j in 2:nrow(summerDaily)){
   if(summerDaily$Event[j] == 1 & summerDaily$Event[j-1] != 1) summerDaily$EventStart[j] = 1
 }
 
-# create a numeric varaible for lag days instead of two groups
+#create a numeric varaible for lag days
 summerDaily$days_since_last_event = NA
 event_days = which(summerDaily$Event == 1)
 for (r in 72:nrow(summerDaily)) {
@@ -43,14 +43,14 @@ for (r in 72:nrow(summerDaily)) {
 #plot(summerDaily$days_since_last_event, type = 'l')
 
 #the above loop did not identify numeric value for events, 
-#assign events the value fo the previous day non-event plus 1
+#assign events the value from the previous day non-event plus 1
 #events covering multiple days have the same time since last event numeric value
 for(s in 1:nrow(summerDaily)){
   if(summerDaily$Event[s] == 1) summerDaily$days_since_last_event[s] = summerDaily$days_since_last_event[s-1]+1
   if(summerDaily$Event[s] == 1 & summerDaily$EventStart[s] == 0) summerDaily$days_since_last_event[s] = summerDaily$days_since_last_event[s-1]
 }
 #####################################
-#merge events (from Daily) with samples, remove April, split by earl/late time periods
+#merge events (from Daily) with samples, remove April if desired
 tmp = summerDaily[,c("Date", "Event", "days_since_last_event")]
 tmpp = merge(summerSample, tmp, by="Date", all.y = FALSE)
 #remove April from analysis if desired
